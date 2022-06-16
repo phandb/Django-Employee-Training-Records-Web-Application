@@ -1,0 +1,72 @@
+{% extends "task/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+            List of your Tasks!
+        </div>
+        <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">Please ensure that task name and category can not be duplicate</p>
+            <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Task Name</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Date Taken</th>
+                      <th scope="col">Expired Date</th>
+                      <th scope="col">Days till Expire</th>
+                      <th scope="col">Actions</th>
+
+                    </tr>
+                  </thead>
+                <tbody>
+
+                {% for task in tasks %}
+                     <tr class="pointer" >
+
+                      <td>{{ loop.index }}</td>
+                      <td>{{ task.task_name }} </td>
+                      <td>{{ task.category }} </td>
+                      <td>{{ task.date_taken }} </td>
+                      <td>{{ task.date_expired }} </td>
+                      {% if "expired" in task.days_expired %}
+                        <td> {{ task.days_expired }} </td>
+                      {% else %}
+                         <td> {{ task.days_expired }} day(s)</td>
+                      {% endif %}
+                      <td>
+                          <!-- Call endpoint in task API -->
+                          <button onclick="window.location.href='edit-task/{{task.id}}'"
+                                  type="button" class="btn btn-outline-info" style="font-size:18px"
+                                  data-toggle="tooltip" data-placement="top" title="Edit">
+                              <i class="fas fa-edit"></i>
+
+                          </button>
+                          <!-- Call endpoint in task API -->
+                          <button onclick="window.location.href='/tasks/delete/{{task.id}}'"
+                                  type="button"
+                                  class="btn btn-outline-danger"
+                                  style="font-size:18px"
+                                  data-toggle="tooltip" data-placement="top" title="Delete">
+                              <i class="fas fa-trash-alt"></i>
+
+                          </button>
+                      </td>
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+             </table>
+
+            <a href="add-task" class="btn btn-outline-primary">Add a new Task!</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

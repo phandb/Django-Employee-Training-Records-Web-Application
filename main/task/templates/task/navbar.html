@@ -1,0 +1,53 @@
+<div class="container">
+    <nav class="navbar navbar-expand-md navbar-dark main-color fixed-top">
+        <a class="navbar-brand" href="{% url 'task-home' %}">Employee CDOC</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'task-home' %}">Home </a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'task-about' %}">About</a>
+                </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ml-auto ">
+
+                 {% if user.is_authenticated %}
+                 <li class="nav-item dropdown ">
+
+                     <a
+                          class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                           role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                         <i class="fas fa-user-alt"></i>
+                         Hi {{ user.username  }}
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-right main-color" aria-labelledby="navbarDropdown">
+                          <a  class="dropdown-item " href="#"><i class="fa fa-gear"></i> Change Password</a>
+                          <a class=" dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                     </div>
+
+
+                 </li>
+                {% else %}
+                <li class="nav-item m-1">
+                    <a type="button" class="btn btn-outline-light" href="{% url 'users-register' %}">Register</a>
+                </li>
+                 <li class="nav-item m-1">
+                    <a type="button" class="btn btn-outline-light" href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</div>
+{% block content %}
+
+{% endblock content%}

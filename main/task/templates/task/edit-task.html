@@ -1,0 +1,61 @@
+{% extends "task/layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+             Let's edit your task!
+        </div>
+        <div class="card-body">
+            {% if msg %}
+                <div class="alert alert-info">
+                    {{ msg }}
+                </div>
+            {% endif %}
+            <form method="POST">
+                <div class="form-group">
+                    <label>Task</label>
+<!--                    <input type="text" class="form-control" name="task_name" value="{{task.task_name}}" required>-->
+
+                    <select id="task" name="task_name_selected"  class="form-control" required>
+
+                        {% for method in methods %}
+
+                        <option value="{{ method }}" {% if method == task.task_name  %} selected {% endif %}>{{ method }}</option>
+
+
+
+                        {% endfor %}
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category_selected"  class="form-control">
+<!--                        <option value="{{ task.category }}"  ></option>-->
+                        {% for category in categories %}
+
+                        <option value="{{ category }}" {% if category == task.category  %} selected {% endif %}>{{ category }}</option>
+
+<!--                                <option value="{{ task.category }}">{{ category }}</option>-->
+
+                        {% endfor %}
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label>Date Taken</label>
+                    <input id="picker" class="form-control" name="date_taken" value="{{task.date_taken}}">
+
+                </div>
+
+
+                <button type="submit" class="btn btn-outline-primary">Update</button>
+                <a href="/" type="button" class="btn btn-outline-info">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
