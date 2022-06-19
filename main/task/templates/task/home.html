@@ -30,15 +30,15 @@
                 {% for task in tasks %}
                      <tr class="pointer" >
 
-                      <td>{{ loop.index }}</td>
+                      <td>{{ forloop.counter }}</td>
                       <td>{{ task.task_name }} </td>
                       <td>{{ task.category }} </td>
-                      <td>{{ task.date_taken }} </td>
-                      <td>{{ task.date_expired }} </td>
-                      {% if "expired" in task.days_expired %}
-                        <td> {{ task.days_expired }} </td>
+                      <td>{{ task.date_taken|date:"M-d-Y" }} </td>
+                      <td>{{ task.date_expired|date:"M-d-Y"}} </td>
+                      {% if "expired" in task.days_til_expire %}
+                        <td> {{ task.days_til_expire }} </td>
                       {% else %}
-                         <td> {{ task.days_expired }} day(s)</td>
+                         <td> {{ task.days_til_expire }} day(s)</td>
                       {% endif %}
                       <td>
                           <!-- Call endpoint in task API -->

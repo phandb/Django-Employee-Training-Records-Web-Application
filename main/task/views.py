@@ -1,11 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from .models import Task
 
 
-# Create your views here.
 @login_required()
 def home_page(request):
-    return render(request, 'task/home.html')
+    tasks = Task.objects.filter(user=request.user.id)
+    context = {
+        'tasks': tasks
+    }
+    return render(request, 'task/home.html', context)
 
 
 def about_page(request):
