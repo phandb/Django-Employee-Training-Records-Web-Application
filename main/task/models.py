@@ -4,6 +4,38 @@ from django.db import models
 from django.utils import timezone
 from django.utils.timezone import localtime
 
+#
+# METHODS = (
+#     ('', 'Select ...'),
+#     ('EPA_504_1', '504.1'),
+#     ('Aroclor', '508.1 Aroclor'),
+#     ('Chlordane', '508.1 Chlordane'),
+#     ('Pesticides', '508.1 Pesticides'),
+#     ('Pesticides_Sublist', '508.1 Pesticides-Sublist'),
+#     ('TCEQ_Ind_List', '508.1 TCEQ-Ind-List'),
+#     ('Toxaphene', '508.1 Toxaphene'),
+#     ('PCB_as_DCB', '508A PCB as DCB'),
+#     ('EPA_515_4', '515.4'),
+#     ('THM', '524.2 THM'),
+#     ('VOC', '524.2 VOC'),
+#     ('Endrin', '525.2 Endrin'),
+#     ('SOC5', '525.2 SOC5'),
+#     ('Carbamates', '531.1 Carbamates'),
+#     ('Glyphosate_547', '547 Glyphosate'),
+#     ('Glyphosate_548', '548.1 Glyphosate'),
+#     ('Endothall', '548.1 Endothall'),
+#     ('Para_Diq', '549.2 Para/Diq'),
+#     ('HAA', '552.2 HAA')
+# )
+#
+# CATEGORIES = (
+#     ('', 'Select ...'),
+#     ('Extract', 'Extract'),
+#     ('Analysis', 'Analysis'),
+#     ('Full Method', 'Full Method')
+#
+# )
+
 
 class Task(models.Model):
     task_name = models.CharField(max_length=100)

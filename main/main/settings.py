@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'task.apps.TaskConfig',  # Task Configuration
     'users.apps.UsersConfig',
     'crispy_forms',
+    'bootstrap_datepicker_plus',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
