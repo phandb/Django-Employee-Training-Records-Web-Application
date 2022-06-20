@@ -25,15 +25,15 @@ class Task(models.Model):
     def days_til_expire(self):
         # Format datetime
         date_format = "%M-%d-%Y"
-        # datetime.now() with USE_TZ set to TRUE ia aware datetime.  Use localtime() instead
-        # to get the current time zone.
+        # datetime.now() with USE_TZ set to TRUE ia aware datetime.
+        # Use localtime(), instead , to get the current time zone.
         days_to_expire = (self.date_expired - localtime()).days
 
         expired_date = self.date_expired.strftime(date_format)
-        today = datetime.now().strftime(date_format)
+        today = localtime().strftime(date_format)
 
         if today < expired_date:
-            return str(abs(days_to_expire) + 1)
+            return str(days_to_expire + 1)
         if today == expired_date:
             return "< 1"
         else:

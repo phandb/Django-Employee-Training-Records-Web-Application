@@ -5,6 +5,13 @@ from .models import Task
 
 class TaskForm(forms.ModelForm):
 
+    # create meta class:
     class Meta:
+        # specify model to be used
         model = Task
-        fields = ['task_name', 'category']
+
+        # specify fields to be used
+        fields = ['task_name',
+                  'category',
+                  'date_taken'
+        ]
