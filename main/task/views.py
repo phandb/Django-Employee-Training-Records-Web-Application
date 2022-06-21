@@ -6,7 +6,6 @@ from .forms import TaskForm
 
 @login_required()
 def home_page(request):
-
     tasks = Task.objects.filter(user=request.user.id)
     context = {
         'tasks': tasks.order_by('task_name')
@@ -21,7 +20,6 @@ def about_page(request):
 
 @login_required()
 def add_task(request):
-
     if request.method == 'POST':
         form = TaskForm(request.POST)
         form.instance.user = request.user
@@ -41,5 +39,11 @@ def add_task(request):
 
 
 @login_required()
-def edit_task(request):
+def edit_task(request, task_id):
     return render(request, 'task/edit-task.html')
+
+
+@login_required()
+def delete_task(request, task_id):
+    Task.objects.filter(id=task_id).delete()
+    return redirect('task-home')
