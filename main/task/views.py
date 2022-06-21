@@ -40,7 +40,31 @@ def add_task(request):
 
 @login_required()
 def edit_task(request, task_id):
-    return render(request, 'task/edit-task.html')
+    data = Task.objects.get(id=task_id)
+
+    # update_screen = True if update == 'update' else False
+    form = TaskForm(request.POST or None)
+    if request.method == 'POST':
+
+        if form.is_valid():
+            data.task_name = form.instance.task_name
+            data.category = form.instance.category
+            data.date_taken = form.instance.date_taken
+            data.save()
+            return redirect('task-home')
+    else:
+        form_data = {
+            'task_name': data.task_name,
+            'category': data.category,
+            'date_taken': data.date_taken
+        }
+        form = TaskForm(initial=form_data)
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'task/edit-task.html', context)
 
 
 @login_required()

@@ -42,12 +42,16 @@
                       {% endif %}
                       <td>
                           <!-- Call endpoint in task API -->
-                          <button onclick="window.location.href='edit-task/{{task.id}}'"
-                                  type="button" class="btn btn-outline-info" style="font-size:18px"
-                                  data-toggle="tooltip" data-placement="top" title="Edit">
-                              <i class="fas fa-edit"></i>
 
-                          </button>
+
+                          <a href="edit-task/{{ task.id }}"
+                             type="button"
+                             class="btn btn-outline-info"
+                             data-toggle="tooltip" data-placement="top"
+                             title="Edit">
+                              <i class="fas fa-edit"></i>
+                          </a>
+
                           <!-- Call endpoint in task API -->
                           <button onclick="window.location.href='/delete-task/{{task.id}}'"
                                   type="button"
