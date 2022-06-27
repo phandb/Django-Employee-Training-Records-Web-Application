@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Task
-from .forms import TaskForm
+from .forms import TaskForm, TaskEditForm
 
 
 @login_required()
@@ -20,17 +20,18 @@ def about_page(request):
 
 @login_required()
 def add_task(request):
+
     if request.method == 'POST':
-        form = TaskForm(request.POST)
+        form = TaskForm(request.POST, request=request)
         form.instance.user = request.user
 
         if form.is_valid():
+
             form.save()
             return redirect('task-home')
     else:
-        form = TaskForm()
+        form = TaskForm(request=request)
 
-    # tasks = Task.objects.filter(user=request.user.id)
     context = {
         # 'tasks': tasks.order_by('task_name'),
         'form': form
@@ -43,12 +44,12 @@ def edit_task(request, task_id):
     data = Task.objects.get(id=task_id)
 
     # update_screen = True if update == 'update' else False
-    form = TaskForm(request.POST or None)
+    form = TaskEditForm(request.POST or None, request=request)
     if request.method == 'POST':
 
         if form.is_valid():
-            data.task_name = form.instance.task_name
-            data.category = form.instance.category
+            data.task_name = data.task_name
+            data.category = data.category
             data.date_taken = form.instance.date_taken
             data.save()
             return redirect('task-home')
@@ -58,7 +59,7 @@ def edit_task(request, task_id):
             'category': data.category,
             'date_taken': data.date_taken
         }
-        form = TaskForm(initial=form_data)
+        form = TaskEditForm(initial=form_data, request=request)
 
     context = {
         'form': form
